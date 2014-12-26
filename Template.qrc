@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/Template">
+        <file>InputEditHtmlTemplate.html</file>
+        <file>ErrorMessageHtmlTemplate.html</file>
+    </qresource>
+</RCC>
