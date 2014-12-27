@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QList>
+#include <QSet>
 
 class Node : public QObject
 {
@@ -15,8 +16,6 @@ public:
         QObject(node.parent())
     {
         this->mExplodedNodesList = node.mExplodedNodesList;
-        this->mFirstList = node.mFirstList;
-        this->mFollowList = node.mFollowList;
         this->mName = node.mName;
     }
 
@@ -31,12 +30,6 @@ public:
     NodesList getExplodedNodesList(){
         return mExplodedNodesList;
     }
-    Nodes getFirstList(){
-        return mFirstList;
-    }
-    Nodes getFollowList(){
-        return mFollowList;
-    }
 
     void addExplodedNodes(Nodes *explodedNodes);
 
@@ -46,6 +39,7 @@ public:
     }
 
     bool isTerminal();
+    bool isNonNode();
 signals:
 
 public slots:
@@ -53,11 +47,10 @@ public slots:
 private:
     QString mName;
     NodesList mExplodedNodesList;
-    Nodes mFirstList;
-    Nodes mFollowList;
 };
 
 typedef QList<Node *> Nodes;
+typedef QSet<Node *> NodeSet;
 typedef QList<QList<Node *> *> NodesList;
 
 #endif // NODE_H

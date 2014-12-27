@@ -22,6 +22,8 @@ void GrammarParser::parseSentence(){
     Nodes explodedNodes; // collect exploded nodes
 
     QStringList strList = mSentencesText.split("\n");
+    qDebug() << strList;
+
     for(int i=0; i<strList.size(); i++) {
         QString str = strList.at(i);
 

@@ -4,6 +4,8 @@
 #include <QDialog>
 #include <QHash>
 #include <QMessageBox>
+#include <QTableView>
+#include <QStandardItemModel>
 #include "Node.h"
 #include "GrammarParser.h"
 
@@ -21,7 +23,7 @@ public:
     void setSentenceText(const QString &text);
 
 public slots:
-    void parseSuccess(const QString &richText);
+    void parseSuccess();
 signals:
     void parseError(const QMap<int, QString> &messageMap);
 private:
@@ -31,12 +33,18 @@ private:
     GrammarParser mGrammarParser;
     Nodes mTerminalNodes;
     Nodes mNonTerminalNodes;
-    Node *mHeadNode;
+    QHash<Node *, NodeSet> mFirstSetHash;
+    QHash<Node *, NodeSet> mFollowSetHash;
+
+    QAbstractItemModel *mFirstModel;
+    QAbstractItemModel *mFollowModel;
 
     void separateNodes(); // separate terminal and nonterminal nodes
-    void processFirst();
-    void processFollow();
+    void processFirstSet();
+    void processFollowSet();
     void updateView();
+    NodeSet getFirstSet(Node *node);
+    QString setHashToRichText(const QHash<Node *, NodeSet> &setHash);
 };
 
 #endif // FIRSTFOLLOWDIALOG_H

@@ -6,6 +6,7 @@
 #include <QFileDialog>
 #include <QDateTime>
 #include <QMap>
+#include <QCursor>
 #include "TextFileUtil.hpp"
 #include "GrammarParser.h"
 
@@ -48,6 +49,7 @@ private:
     QString mInputTextTemp;
     QString mInputEditHtmlTemplate;
     QString mErrorMessageHtmlTemplate;
+    bool mIsSettingHtml;
 
     void loadTemplate();
 };

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
-    <height>480</height>
+    <width>506</width>
+    <height>350</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -39,26 +39,54 @@
        <string>First</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
-       <property name="spacing">
-        <number>0</number>
-       </property>
-       <property name="leftMargin">
-        <number>0</number>
-       </property>
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>0</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
        <item>
-        <widget class="QTableView" name="FirstTableView">
-         <property name="enabled">
-          <bool>true</bool>
+        <widget class="QSplitter" name="splitter">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>2</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
          </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <widget class="QTableView" name="FirstTableView">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+            <horstretch>2</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="dragDropOverwriteMode">
+           <bool>false</bool>
+          </property>
+          <property name="textElideMode">
+           <enum>Qt::ElideNone</enum>
+          </property>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>30</number>
+          </attribute>
+          <attribute name="horizontalHeaderMinimumSectionSize">
+           <number>20</number>
+          </attribute>
+          <attribute name="verticalHeaderMinimumSectionSize">
+           <number>20</number>
+          </attribute>
+         </widget>
+         <widget class="QTextBrowser" name="FirstTextBrowser">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+            <horstretch>5</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
         </widget>
        </item>
       </layout>
@@ -68,23 +96,30 @@
        <string>Follow</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout">
-       <property name="spacing">
-        <number>0</number>
-       </property>
-       <property name="leftMargin">
-        <number>0</number>
-       </property>
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>0</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
        <item>
-        <widget class="QTableView" name="FollowTableView"/>
+        <widget class="QTableView" name="FollowTableView">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+         <property name="dragDropOverwriteMode">
+          <bool>false</bool>
+         </property>
+         <property name="textElideMode">
+          <enum>Qt::ElideNone</enum>
+         </property>
+         <attribute name="horizontalHeaderDefaultSectionSize">
+          <number>30</number>
+         </attribute>
+         <attribute name="horizontalHeaderMinimumSectionSize">
+          <number>20</number>
+         </attribute>
+         <attribute name="verticalHeaderMinimumSectionSize">
+          <number>20</number>
+         </attribute>
+        </widget>
        </item>
       </layout>
      </widget>

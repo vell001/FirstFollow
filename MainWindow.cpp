@@ -16,6 +16,7 @@ void MainWindow::newInputTextDialog(){
         delete mInputTextDialog;
     }
     mInputTextDialog = new InputTextDialog(this);
+    mInputTextDialog->setHidden(true);
     connect(mInputTextDialog, SIGNAL(InputEnd(QString)), this, SLOT(inputTextDialog_InputEnd()));
     connect(mInputTextDialog, SIGNAL(InputCancel(QString)), this, SLOT(inputTextDialog_InputCancel()));
 }
@@ -25,8 +26,9 @@ void MainWindow::newFirstFollowDialog(const QString &text){
         delete mFirstFollowDialog;
     }
     mFirstFollowDialog = new FirstFollowDialog(this);
+    mFirstFollowDialog->setHidden(true);
     connect(mFirstFollowDialog, SIGNAL(parseError(QMap<int,QString>)), this, SLOT(parseError(QMap<int,QString>)));
-    connect(mFirstFollowDialog, SIGNAL(accepted()), this, SLOT(show()));
+    connect(mFirstFollowDialog, SIGNAL(accepted()), this, SLOT(closeFirstFollowDialog()));
     mFirstFollowDialog->setSentenceText(text);
 }
 
@@ -34,7 +36,6 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete mInputTextDialog;
-    delete mFirstFollowDialog;
 }
 
 void MainWindow::on_BtnReadFromFile_clicked()
@@ -51,13 +52,13 @@ void MainWindow::on_BtnReadFromFile_clicked()
     newInputTextDialog();
     mInputTextDialog->setTextFileName(fileName);
     this->hide();
-    mInputTextDialog->show();
+    showWidget(mInputTextDialog);
 }
 
 void MainWindow::on_BtnInputNow_clicked()
 {
     this->hide();
-    mInputTextDialog->show();
+    showWidget(mInputTextDialog);
 }
 
 /**
@@ -101,12 +102,13 @@ void MainWindow::inputTextDialog_InputEnd(){
         QMessageBox::warning(this,
                              "empty input!!!",
                              "empty input!!!\n please input again");
+        showWidget(mInputTextDialog);
     }
 }
 
 void MainWindow::inputTextDialog_InputCancel(){
     mInputTextDialog->hide();
-    this->show();
+    showWidget(this);
 }
 
 void MainWindow::parseError(const QMap<int, QString> &messageMap){
@@ -123,9 +125,18 @@ void MainWindow::parseError(const QMap<int, QString> &messageMap){
         QMessageBox::warning(this,
                              "text parse error",
                              QString("text parse error!!! error message:\n%1").arg(errorMesStr));
-        this->show();
+        closeFirstFollowDialog();
+    }
+}
+
+void MainWindow::closeFirstFollowDialog(){
+    showWidget(this);
+    if(mFirstFollowDialog != NULL){
         mFirstFollowDialog->deleteLater();
         mFirstFollowDialog = NULL;
     }
 }
 
+void MainWindow::showWidget(QWidget *widget){
+    while(widget->isHidden()) widget->show();
+}

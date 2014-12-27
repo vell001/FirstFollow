@@ -32,7 +32,7 @@ public:
     SentenceHash *getSentenceHash(){
         return mSentenceHash;
     }
-    QHash<QString, Node *> *getNodes(){
+    QHash<QString, Node *> *getNodesHash(){
         return mNodesHash;
     }
     Node *getHeadNode(){

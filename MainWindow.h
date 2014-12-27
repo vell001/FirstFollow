@@ -7,6 +7,7 @@
 #include <QMessageBox>
 #include <QTextStream>
 #include <QDebug>
+#include <QWidget>
 #include "InputTextDialog.h"
 #include "GrammarParser.h"
 #include "FirstFollowDialog.h"
@@ -32,6 +33,8 @@ private slots:
     void inputTextDialog_InputCancel();
 
     void parseError(const QMap<int, QString> &messageMap);
+
+    void closeFirstFollowDialog();
 private:
     Ui::MainWindow *ui;
 
@@ -42,6 +45,7 @@ private:
 
     void newInputTextDialog();
     void newFirstFollowDialog(const QString &text);
+    void showWidget(QWidget *widget);
 };
 
 #endif // MAINWINDOW_H

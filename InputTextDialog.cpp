@@ -3,7 +3,8 @@
 
 InputTextDialog::InputTextDialog(QWidget *parent, const QString &textFileName) :
     QDialog(parent),
-    ui(new Ui::InputTextDialog)
+    ui(new Ui::InputTextDialog),
+    mIsSettingHtml(false)
 {
     ui->setupUi(this);
     loadTemplate();
@@ -71,20 +72,25 @@ void InputTextDialog::on_textEdit_textChanged()
     if(this->windowTitle() == TitleOfSaved)
         this->setWindowTitle(TitleOfUnsaved);
 
-    QString tempText = ui->textEdit->toPlainText();
-    if(tempText.indexOf(mInputTextTemp) != 0 ||
-            tempText.lastIndexOf("\n") == tempText.size()-1) {
+    if(!mIsSettingHtml) {
+        QString tempText = ui->textEdit->toPlainText();
 
-        mInputTextTemp = tempText.left(tempText.lastIndexOf("\n") + 1);
+        if(tempText.indexOf(mInputTextTemp) != 0 ||
+                tempText.lastIndexOf("\n") == tempText.size()-1) {
 
-        mGrammarParser.updateSentencesText(mInputTextTemp);
+            mInputTextTemp = tempText.left(tempText.lastIndexOf("\n") + 1);
+
+            mGrammarParser.updateSentencesText(mInputTextTemp);
+        }
     }
 }
 
 void InputTextDialog::parseSuccess(const QString &richText){
     qDebug() << richText;
+    mIsSettingHtml = true;
     ui->textEdit->setHtml(QString(mInputEditHtmlTemplate).arg(richText));
     ui->textEdit->moveCursor(QTextCursor::End);
+    mIsSettingHtml = false;
 }
 
 void InputTextDialog::parseError(const QMap<int, QString> &messageMap){

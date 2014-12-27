@@ -16,3 +16,8 @@ bool Node::isTerminal(){
     if(mExplodedNodesList.isEmpty()) return true;
     else return false;
 }
+
+bool Node::isNonNode(){
+    if(mName == "ε")  return true;
+    else return false;
+}
