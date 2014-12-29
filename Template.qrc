@@ -2,5 +2,6 @@
     <qresource prefix="/Template">
         <file>InputEditHtmlTemplate.html</file>
         <file>ErrorMessageHtmlTemplate.html</file>
+        <file>SetHashHtmlTemplate.html</file>
     </qresource>
 </RCC>

@@ -8,6 +8,7 @@
 #include <QStandardItemModel>
 #include "Node.h"
 #include "GrammarParser.h"
+#include "TextFileUtil.hpp"
 
 namespace Ui {
 class FirstFollowDialog;
@@ -35,6 +36,7 @@ private:
     Nodes mNonTerminalNodes;
     QHash<Node *, NodeSet> mFirstSetHash;
     QHash<Node *, NodeSet> mFollowSetHash;
+    QString mSetHashHtmlTemplate;
 
     QAbstractItemModel *mFirstModel;
     QAbstractItemModel *mFollowModel;
@@ -44,7 +46,11 @@ private:
     void processFollowSet();
     void updateView();
     NodeSet getFirstSet(Node *node);
+    bool getFollowSet(Node *node);
+    Node *findNode(const NodeSet& nodeSet, QString nodeName);
+    Node *findNonNode(const NodeSet& nodeSet);
     QString setHashToRichText(const QHash<Node *, NodeSet> &setHash);
+    void loadTemplate();
 };
 
 #endif // FIRSTFOLLOWDIALOG_H

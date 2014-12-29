@@ -29,6 +29,7 @@ void GrammarParser::parseSentence(){
 
         NodeParseHash *nodeParseHash = new NodeParseHash;
         SentenceParseHash *sentenceParseHash = new SentenceParseHash;
+
         sentenceParseHash->insert(str, nodeParseHash);
         mSentenceHash->insert(i+1, sentenceParseHash);
 
